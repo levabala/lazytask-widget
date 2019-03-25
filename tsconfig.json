@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "target": "es5",
+    "lib": ["es6", "es2017.object", "es2017", "dom", "esnext.asynciterable"],
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "typeRoots": ["index.d.ts", "node_modules/@types"],
+    "declaration": true
+  },
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
