@@ -35,7 +35,10 @@ export default class LazyWidget extends React.Component<IProps, IState> {
     this.setState({
       lastTickDuration: LazyTaskManager.lastTickDuration,
       tasksLastTick: LazyTaskManager.tasksPerformedLastTick,
-      tasksToDo: LazyTaskManager.taskStack.length
+      tasksToDo: LazyTaskManager.taskStacks.reduce(
+        (acc, stack) => acc + stack.length,
+        0
+      )
     });
   };
 
