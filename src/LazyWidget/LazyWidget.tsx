@@ -18,6 +18,7 @@ export interface IState {
   lastTickDuration: number;
   tasksLastTick: number;
   tasksToDo: number;
+  tasksSuspended: number;
 }
 
 export default class LazyWidget extends React.Component<IProps, IState> {
@@ -27,7 +28,8 @@ export default class LazyWidget extends React.Component<IProps, IState> {
     this.state = {
       lastTickDuration: 0,
       tasksLastTick: 0,
-      tasksToDo: 0
+      tasksToDo: 0,
+      tasksSuspended: 0
     };
   }
 
@@ -38,7 +40,8 @@ export default class LazyWidget extends React.Component<IProps, IState> {
       tasksToDo: LazyTaskManager.taskStacks.reduce(
         (acc, stack) => acc + stack.length,
         0
-      )
+      ),
+      tasksSuspended: LazyTaskManager.tasksSuspended.length
     });
   };
 
@@ -47,11 +50,17 @@ export default class LazyWidget extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { tasksLastTick, tasksToDo, lastTickDuration } = this.state;
+    const {
+      tasksLastTick,
+      tasksToDo,
+      lastTickDuration,
+      tasksSuspended
+    } = this.state;
     return (
       <div style={styles}>
         <span>lastTickDuration: {lastTickDuration.toString().padEnd(5)}</span>
         <span>TasksToDo: {tasksToDo.toString().padEnd(5)}</span>
+        <span>TasksSuspended: {tasksSuspended.toString().padEnd(5)}</span>
         <span>TasksLastTick: {tasksLastTick.toString().padEnd(5)}</span>
       </div>
     );

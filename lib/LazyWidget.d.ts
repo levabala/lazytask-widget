@@ -6,6 +6,7 @@ export interface IState {
     lastTickDuration: number;
     tasksLastTick: number;
     tasksToDo: number;
+    tasksSuspended: number;
 }
 export default class LazyWidget extends React.Component<IProps, IState> {
     constructor(props: IProps);
