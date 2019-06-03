@@ -19,6 +19,7 @@ export interface IState {
   tasksLastTick: number;
   tasksToDo: number;
   tasksSuspended: number;
+  tasksDestructed: number;
 }
 
 export default class LazyWidget extends React.Component<IProps, IState> {
@@ -29,19 +30,21 @@ export default class LazyWidget extends React.Component<IProps, IState> {
       lastTickDuration: 0,
       tasksLastTick: 0,
       tasksToDo: 0,
-      tasksSuspended: 0
+      tasksSuspended: 0,
+      tasksDestructed: 0
     };
   }
 
   public updateData = () => {
     this.setState({
-      lastTickDuration: LazyTaskManager.lastTickDuration,
+      lastTickDuration: Math.max(...LazyTaskManager.durationHistory),
       tasksLastTick: LazyTaskManager.tasksPerformedLastTick,
       tasksToDo: LazyTaskManager.taskStacks.reduce(
         (acc, stack) => acc + stack.length,
         0
       ),
-      tasksSuspended: LazyTaskManager.tasksSuspended.length
+      tasksSuspended: LazyTaskManager.tasksSuspended.length,
+      tasksDestructed: LazyTaskManager.tasksDestructed
     });
   };
 
@@ -54,7 +57,8 @@ export default class LazyWidget extends React.Component<IProps, IState> {
       tasksLastTick,
       tasksToDo,
       lastTickDuration,
-      tasksSuspended
+      tasksSuspended,
+      tasksDestructed
     } = this.state;
     return (
       <div style={styles}>
@@ -62,6 +66,7 @@ export default class LazyWidget extends React.Component<IProps, IState> {
         <span>TasksToDo: {tasksToDo.toString().padEnd(5)}</span>
         <span>TasksSuspended: {tasksSuspended.toString().padEnd(5)}</span>
         <span>TasksLastTick: {tasksLastTick.toString().padEnd(5)}</span>
+        <span>TasksDestructed: {tasksDestructed.toString().padEnd(5)}</span>
       </div>
     );
   }
