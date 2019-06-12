@@ -18,5 +18,9 @@
   },
   "dependencies": {
     "@levabala/lazytask": "0.0.7"
-  }
+  },
+  "files": [
+    "lib/*",
+    "src/**/*.ts*"
+  ]
 }
