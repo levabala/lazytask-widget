@@ -1,5 +1,5 @@
-import { LazyTaskManager } from '@levabala/lazytask/build/dist';
-import * as React from 'react';
+import { LazyTaskManager } from "@levabala/lazytask/build/dist";
+import * as React from "react";
 
 const styles: React.CSSProperties = {
   width: "140px",
@@ -40,7 +40,7 @@ export default class LazyWidget extends React.Component<IProps, IState> {
       lastTickDuration: Math.max(...LazyTaskManager.durationHistory),
       tasksLastTick: LazyTaskManager.tasksPerformedLastTick,
       tasksToDo: LazyTaskManager.taskStacks.reduce(
-        (acc, stack) => acc + stack.length,
+        (acc: any, stack: any) => acc + stack.length,
         0
       ),
       tasksSuspended: LazyTaskManager.tasksSuspended.length,
